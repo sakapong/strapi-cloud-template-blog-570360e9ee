@@ -62,6 +62,28 @@ export interface SharedSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedStaff extends Struct.ComponentSchema {
+  collectionName: 'components_shared_staff';
+  info: {
+    description: '';
+    displayName: 'Staff';
+  };
+  attributes: {
+    Description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'default';
+        }
+      >;
+    Email: Schema.Attribute.Email;
+    Fullname: Schema.Attribute.String;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Position: Schema.Attribute.String;
+    TelephoneNumber: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -70,6 +92,7 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
+      'shared.staff': SharedStaff;
     }
   }
 }
